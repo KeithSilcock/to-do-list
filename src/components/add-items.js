@@ -7,7 +7,7 @@ class AddItem extends React.Component{
         this.state = {
             title:'',
             details:'',
-        }
+        };
         this.handleChange = this.handleChange.bind(this)
         this.handleAddItem = this.handleAddItem.bind(this)
     }
@@ -20,8 +20,12 @@ class AddItem extends React.Component{
     }
     handleAddItem(event){
         event.preventDefault();
-
         this.props.addItemCallback(this.state);
+
+        this.setState({
+            title:'',
+            details:'',
+        });
     }
 
     render(){
