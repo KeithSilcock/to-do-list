@@ -7,6 +7,7 @@ export default (props) => {
             <h1 className="center grey-text">No To-Do Items</h1>
         )
     }
+    //add delete button now
 
     const list = props.listData.map(function (item, index) {
         return(
