@@ -11,7 +11,15 @@ export default (props) => {
 
     const list = props.listData.map(function (item, index) {
         return(
-            <li key={index} className='collection-item'>{item.title}</li>
+            <li key={index} className='collection-item row'>
+                <div className="col s10">
+                {item.title}
+                </div>
+                <button
+                    className='btn red darken-2 right-align'
+                    onClick={(e)=> props.deleteItemCallback(index)}
+                >Delete</button>
+            </li>
         )
     });
 

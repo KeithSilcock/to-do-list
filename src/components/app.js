@@ -24,9 +24,15 @@ class App extends React.Component {
             listData:listData,
         });
     }
-
     componentDidMount(){
         this.getListData();
+    }
+    deleteItem(index){
+        const listData = this.state.listData.slice(0);
+
+        listData.splice(index,1);
+        this.setState({listData})
+
     }
 
     render() {
@@ -36,7 +42,7 @@ class App extends React.Component {
                 <div className="container">
                     <h1 className='center'>To do list</h1>
                     <AddItem addItemCallback={this.addItem.bind(this)} />
-                    <List listData={listData}/>
+                    <List listData={listData} deleteItemCallback={this.deleteItem.bind(this)}/>
                 </div>
             </div>
         )
