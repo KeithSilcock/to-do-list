@@ -1,10 +1,13 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import React from 'react';
+import axios from 'axios';
 import '../assets/css/app.css';
 import List from './list';
 import AddItem from './add-items';
 import listData from '../helpers/list_data';
 
+const BASE_URL = 'http://api.reactprototypes.com';
+const API_KEY = '?key=keithicusMaximus';
 
 class App extends React.Component {
     constructor(props){
@@ -14,25 +17,29 @@ class App extends React.Component {
             listData:[],
         };
     }
-    addItem(Item){
-        this.setState({
-            listData: [Item, ...this.state.listData],
-        })
+    async addItem(item){
+        await axios.post(`${BASE_URL}/todos${API_KEY}`, item);
+        this.getListData();
     }
-    getListData(){
-        this.setState({
-            listData:listData,
-        });
+    async getListData(){
+        try {
+            const response = await axios.get(`${BASE_URL}/todos${API_KEY}`);
+            this.setState({
+                listData: response.data.todos,
+            })
+        }
+        catch(err){
+            console.log('error:', err.message)
+        }
+
     }
     componentDidMount(){
         this.getListData();
     }
-    deleteItem(index){
-        const listData = this.state.listData.slice(0);
-
-        listData.splice(index,1);
-        this.setState({listData})
-
+    async deleteItem(id){
+        const response = await axios.delete(`${BASE_URL}/todos/${id + API_KEY}`);
+        console.log(response)
+        this.getListData();
     }
 
     render() {

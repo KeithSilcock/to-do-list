@@ -17,7 +17,7 @@ export default (props) => {
                 </div>
                 <button
                     className='btn red darken-2 right-align'
-                    onClick={(e)=> props.deleteItemCallback(index)}
+                    onClick={(e)=> props.deleteItemCallback(item._id)}
                 >Delete</button>
             </li>
         )
